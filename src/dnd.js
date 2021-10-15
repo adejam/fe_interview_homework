@@ -74,9 +74,9 @@ const dndMediator = new Mediator("idle", {
       const currentDragArea = evt.currentTarget;
 
       if (currentDragArea !== cachedCurrentTarget.parentNode && currentDragArea !== document) {
-        console.log(cachedCurrentTarget);
-        console.log(cachedOffsetCoords);
-        console.log(cachedDragImage);
+        currentDragArea.removeChild(imageDropShadow);
+        cachedCurrentTarget.parentNode.removeChild(cachedCurrentTarget);
+        currentDragArea.appendChild(cachedCurrentTarget);
       }
     },
     mouseenter(evt) {
@@ -99,7 +99,7 @@ const dndMediator = new Mediator("idle", {
     mouseleave(evt) {
       const currentDragArea = evt.target;
       if (currentDragArea !== cachedCurrentTarget.parentNode && currentDragArea !== document) {
-        evt.target.removeChild(imageDropShadow);
+        currentDragArea.removeChild(imageDropShadow);
       }
     },
   },
