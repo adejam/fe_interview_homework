@@ -1,5 +1,12 @@
 # Toggl Plan Take Home Project
 
+## Live Demo(Published on Surge)
+
+[Drag-n-Drop](https://dnd-assignment.surge.sh/)
+
+## Style Guides
+- [Git Style Guide](https://udacity.github.io/git-styleguide/)
+
 ## The Mission
 
 Hello there future Toggl Plan Frontend Developer 👋 Your mission, should you choose to accept it, is to add drop functionality to this template:
