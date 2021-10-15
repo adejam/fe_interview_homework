@@ -1,5 +1,5 @@
 import { Mediator } from "./mediator";
-import { px, setNodeStyle, translate3d } from "./utils";
+import { px, setNodeStyle, translate3d, createDOMNode } from "./utils";
 
 function reset(mediator) {
   document.removeEventListener("mousemove", mediator.receive);
@@ -24,6 +24,9 @@ function defaultDragImage(node) {
 let cachedCurrentTarget;
 let cachedOffsetCoords;
 let cachedDragImage;
+let imageWidth;
+let imageHeight;
+let imageDropShadow;
 
 const dndMediator = new Mediator("idle", {
   idle: {
@@ -37,6 +40,8 @@ const dndMediator = new Mediator("idle", {
       const offsetY = evt.clientY - rect.top;
       cachedOffsetCoords = [offsetX, offsetY];
       cachedDragImage = defaultDragImage(cachedCurrentTarget);
+      imageWidth = rect.width;
+      imageHeight = rect.height;
 
       setNodeStyle(cachedDragImage, {
         transform: translate3d(rect.left, rect.top),
@@ -62,9 +67,40 @@ const dndMediator = new Mediator("idle", {
         ),
       });
     },
-    mouseup() {
+    mouseup(evt) {
       reset(dndMediator);
       dndMediator.setState("idle");
+
+      const currentDragArea = evt.currentTarget;
+
+      if (currentDragArea !== cachedCurrentTarget.parentNode && currentDragArea !== document) {
+        console.log(cachedCurrentTarget);
+        console.log(cachedOffsetCoords);
+        console.log(cachedDragImage);
+      }
+    },
+    mouseenter(evt) {
+      const currentDragArea = evt.currentTarget;
+      if (currentDragArea !== cachedCurrentTarget.parentNode && currentDragArea !== document) {
+        console.log("entered");
+        imageDropShadow = createDOMNode("div", {
+          style: {
+            backgroundColor: "#c3bdbd",
+            boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.05)',
+            width: `${imageWidth}px`,
+            height: `${imageHeight}px`,
+            opacity: 0.8,
+          },
+          className: "p-2 rounded-md text-center text-white",
+        },"Drop Image Here");
+        evt.target.appendChild(imageDropShadow);
+      }
+    },
+    mouseleave(evt) {
+      const currentDragArea = evt.target;
+      if (currentDragArea !== cachedCurrentTarget.parentNode && currentDragArea !== document) {
+        evt.target.removeChild(imageDropShadow);
+      }
     },
   },
 });
