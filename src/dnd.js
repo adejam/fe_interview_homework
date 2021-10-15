@@ -80,7 +80,7 @@ const dndMediator = new Mediator("idle", {
       }
     },
     mouseenter(evt) {
-      const currentDragArea = evt.currentTarget;
+      const currentDragArea = evt.target;
       if (currentDragArea !== cachedCurrentTarget.parentNode && currentDragArea !== document) {
         console.log("entered");
         imageDropShadow = createDOMNode("div", {
@@ -92,8 +92,8 @@ const dndMediator = new Mediator("idle", {
             opacity: 0.8,
           },
           className: "p-2 rounded-md text-center text-white",
-        },"Drop Image Here");
-        evt.target.appendChild(imageDropShadow);
+        },"Drop image here");
+        currentDragArea.appendChild(imageDropShadow);
       }
     },
     mouseleave(evt) {

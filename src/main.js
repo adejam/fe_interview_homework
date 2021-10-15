@@ -20,3 +20,6 @@ dragAreaA.addEventListener('mouseup', onDrag);
 dragAreaB.addEventListener('mouseenter', onDrag);
 dragAreaB.addEventListener('mouseleave', onDrag);
 dragAreaB.addEventListener('mouseup', onDrag);
+
+dragAreaA.addEventListener('mouseenter', onDrag);
+dragAreaA.addEventListener('mouseleave', onDrag);
