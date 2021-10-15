@@ -24,8 +24,8 @@ function defaultDragImage(node) {
 let cachedCurrentTarget;
 let cachedOffsetCoords;
 let cachedDragImage;
-let imageWidth;
-let imageHeight;
+let cachedCurrentTargetWidth;
+let cachedCurrentTargetHeight;
 let imageDropShadow;
 
 const dndMediator = new Mediator("idle", {
@@ -40,13 +40,13 @@ const dndMediator = new Mediator("idle", {
       const offsetY = evt.clientY - rect.top;
       cachedOffsetCoords = [offsetX, offsetY];
       cachedDragImage = defaultDragImage(cachedCurrentTarget);
-      imageWidth = rect.width;
-      imageHeight = rect.height;
+      cachedCurrentTargetWidth = rect.width;
+      cachedCurrentTargetHeight = rect.height;
 
       setNodeStyle(cachedDragImage, {
         transform: translate3d(rect.left, rect.top),
-        width: px(rect.width),
-        height: px(rect.height),
+        width: px(cachedCurrentTargetWidth),
+        height: px(cachedCurrentTargetHeight),
       });
 
       document.addEventListener("mousemove", dndMediator.receive);
@@ -85,9 +85,9 @@ const dndMediator = new Mediator("idle", {
           style: {
             backgroundColor: "#c3bdbd",
             boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.05)',
-            width: `${imageWidth}px`,
-            height: `${imageHeight}px`,
-            opacity: 0.8,
+            width: px(cachedCurrentTargetWidth),
+            height: px(cachedCurrentTargetHeight),
+            opacity: 0.5,
           },
           className: "p-2 rounded-md text-center text-white",
         },"Drop image here");
