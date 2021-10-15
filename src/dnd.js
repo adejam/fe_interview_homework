@@ -81,7 +81,6 @@ const dndMediator = new Mediator("idle", {
     mouseenter(evt) {
       const currentDragArea = evt.target;
       if (currentDragArea !== cachedCurrentTarget.parentNode && currentDragArea !== document) {
-        console.log("entered");
         imageDropShadow = createDOMNode("div", {
           style: {
             backgroundColor: "#c3bdbd",
