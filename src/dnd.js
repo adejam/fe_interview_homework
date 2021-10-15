@@ -69,7 +69,6 @@ const dndMediator = new Mediator("idle", {
     },
     mouseup(evt) {
       reset(dndMediator);
-      dndMediator.setState("idle");
 
       const currentDragArea = evt.currentTarget;
 
